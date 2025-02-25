@@ -12,7 +12,7 @@ class AuthController extends Controller
     
     function login(Request $request)
     {
-
+        
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
