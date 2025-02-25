@@ -9,10 +9,9 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    
+
     function login(Request $request)
     {
-        
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -41,6 +40,36 @@ class AuthController extends Controller
             'message' => 'success',
             'user' => $user,
         ]);
+    }
 
+
+    function register(Request $request)
+    {
+
+        $request->validate([
+            "name" => 'required',
+            "email" => 'required|email|unique:users,email',
+            "password" => 'required'
+        ]);
+
+        $user = User::create([
+            "name" => $request->name,
+            "email" => $request->email,
+            "password" => Hash::make($request->password), //untuk encrypt password
+        ]);
+
+        return response()->json([
+            'message' => 'Berhasil Register',
+        ]);
+    }
+
+    function logout(Request $request)
+    {
+
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'messaage' => 'Berhasil logout'
+        ]);
     }
 }
