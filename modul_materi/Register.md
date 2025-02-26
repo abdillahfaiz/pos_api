@@ -35,7 +35,7 @@ Variable parameter $request merupakan data yang dikirimkan dari API
 
   #### 1. Validasi Input Name, Email dan Password
   ```php
-    function login(Request $request){
+    function register(Request $request){
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
