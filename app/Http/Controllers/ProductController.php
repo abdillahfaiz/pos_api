@@ -29,10 +29,16 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required',
-        ]);
+
+        //Kita pindah validasi dibawah ini menjadi di function rules() di dalam class storeProductRequest yang berada di folder app/Http/Requests
+
+        // $request->validate([
+        //     'name' => 'required',
+        //     'description' => 'required',
+        //     'price' => 'required',
+        //     'stock' => 'required',
+        // ]);
+
 
         $product = new Product;
         $product->name = $request->name;
@@ -54,13 +60,6 @@ class ProductController extends Controller
             'status' => true,
             'message' => 'Berhasil Create Product'
         ], 200);
-        
-
-        // $product = Product::create([
-        //     'name' => $request->name,
-        //     'description' => $request->description,
-        // ]);
-
     }
 
     /**
